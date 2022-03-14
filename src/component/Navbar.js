@@ -1,67 +1,85 @@
 import AppBar from "@mui/material/AppBar";
-import React from "react";
+import React, { useState } from "react";
 import profileUser from "../assets/Profile-PNG-File.png";
 // icon navbar
 import SettingsIcon from "@mui/icons-material/Settings";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import PersonIcon from "@mui/icons-material/Person";
+
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import HomeIcon from "@mui/icons-material/Home";
 // element
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/system";
 import Box from "@mui/material/Box";
-
+import Avatar from "@mui/material/Avatar";
 import TextField from "@mui/material/TextField";
-import { Search } from "@mui/icons-material";
-import { makeStyles } from "@mui/styles";
-const useStyles = makeStyles({
-  boxUser: {
+import Button from "@mui/material/Button";
+import { Home, Search } from "@mui/icons-material";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import { Drawer, List, ListItem, ListItemText } from "@mui/material";
+
+// array for drawer
+const menuDrawer = ["افزودن سایت ها", "پیشخوان", "سایت ها"];
+// add style styled
+const BoxUser = styled(Box)(() => {
+  return {
     display: "flex",
     paddingLeft: 15,
-  },
-  iconsLeft: {
-    fontSize: 50,
-  },
-  imgProfile: {
-    width: 50,
-    height: 50,
-  },
-  appbar: {
+  };
+});
+const IconsLeft = styled(Box)(() => {
+  return {
+    paddingTop: 9,
+  };
+});
+const Appbar = styled(AppBar)(() => {
+  return {
     background: "#FFFFFF",
     color: "black",
-  },
-  toolbar: {
+  };
+});
+const ToolBar = styled(Toolbar)(() => {
+  return {
     display: "flex",
     justifyContent: "space-between",
-  },
-  inputSearch: {
-    borderRadius: "200%",
+  };
+});
+
+const SearchBox = styled(TextField)(() => {
+  return {
+    borderRadius: 50,
     width: 300,
-  },
+  };
 });
 export default function Navbar() {
-  const classes = useStyles();
-  const SearchBox = styled(TextField)(() => {
-    return {
-      borderRadius: 50,
-    };
-  });
+  const [menu, setMenu] = useState(false);
+  const handleClick = () => {
+    setMenu(false);
+  };
   return (
-    <AppBar className={classes.appbar} color="default">
-      <Toolbar className={classes.toolbar}>
+    <Appbar>
+      <ToolBar>
         <Box sx={{ display: "flex" }}>
-          <Box>
-            <SettingsIcon className={classes.iconsLeft} />
-            <NotificationsNoneIcon className={classes.iconsLeft} />
-            <MailOutlineIcon className={classes.iconsLeft} />
-          </Box>
-          <Box className={classes.boxUser}>
+          <IconsLeft>
+            <IconButton href="#">
+              <SettingsIcon />
+            </IconButton>
+            <IconButton href="#">
+              <NotificationsNoneIcon />
+            </IconButton>
+
+            <IconButton href="#">
+              <MailOutlineIcon />
+            </IconButton>
+          </IconsLeft>
+          <BoxUser>
             <Box sx={{ height: "50px" }}>
-              <img
+              <Avatar
                 src={profileUser}
                 alt="profile-user"
-                className={classes.imgProfile}
+                sx={{ width: 50, height: 50 }}
               />
             </Box>
             <Box>
@@ -72,18 +90,50 @@ export default function Navbar() {
                 designer
               </Typography>
             </Box>
-          </Box>
+          </BoxUser>
         </Box>
         <Box>
-          <TextField
-            variant="filled"
-            label="Search"
-            className={classes.inputSearch}
-          >
+          <SearchBox variant="filled" label="Search" s>
             <Search />
-          </TextField>
+          </SearchBox>
         </Box>
-      </Toolbar>
-    </AppBar>
+        <Box sx={{ display: "flex", flexWrap: "warp", padding: 4 }}>
+          <Typography>tracker</Typography>
+          <MenuIcon
+            onClick={() => {
+              if (menu === false) {
+                setMenu(true);
+              } else {
+                setMenu(false);
+              }
+              console.log(menu);
+            }}
+          />
+        </Box>
+        {menu && (
+          <Drawer
+            sx={{
+              width: 500,
+              flexShrink: 0,
+              "& .MuiDrawer-paper": {
+                width: 350,
+                boxSizing: "border-box",
+              },
+            }}
+            variant="permanent"
+            anchor="right"
+          >
+            <List>
+              {menuDrawer.map((item, index) => (
+                <ListItem button key={item}>
+                  <HomeIcon />
+                  <ListItemText primary={item} />
+                </ListItem>
+              ))}
+            </List>
+          </Drawer>
+        )}
+      </ToolBar>
+    </Appbar>
   );
 }
