@@ -22,6 +22,10 @@ import { Drawer, List, ListItem, ListItemText } from "@mui/material";
 
 // array for drawer
 const menuDrawer = ["افزودن سایت ها", "پیشخوان", "سایت ها"];
+// const icons={
+//   HomeIcon,
+
+// }
 // add style styled
 const BoxUser = styled(Box)(() => {
   return {
@@ -113,7 +117,7 @@ export default function Navbar() {
         {menu && (
           <Drawer
             sx={{
-              width: 500,
+              width: 300,
               flexShrink: 0,
               "& .MuiDrawer-paper": {
                 width: 350,
