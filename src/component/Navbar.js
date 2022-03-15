@@ -22,10 +22,7 @@ import { Drawer, List, ListItem, ListItemText } from "@mui/material";
 
 // array for drawer
 const menuDrawer = ["افزودن سایت ها", "پیشخوان", "سایت ها"];
-// const icons={
-//   HomeIcon,
 
-// }
 // add style styled
 const BoxUser = styled(Box)(() => {
   return {
@@ -59,9 +56,7 @@ const SearchBox = styled(TextField)(() => {
 });
 export default function Navbar() {
   const [menu, setMenu] = useState(false);
-  const handleClick = () => {
-    setMenu(false);
-  };
+
   return (
     <Appbar>
       <ToolBar>
