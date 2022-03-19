@@ -38,13 +38,16 @@ export default function Upload() {
             type="file"
             multiple
             onChange={(e) => {
+              setUpload(true);
               console.log(e.target.value);
               dispatch(post(e.target.value));
               dispatch(add(e.target.files[0].name));
               console.log(e.target.files[0].name);
             }}
           />
-          <Box sx={{ display: "none" }}>
+          <Box
+            sx={upload === false ? { display: "none" } : { display: "block" }}
+          >
             <Typography>uploading</Typography>
             <Typography>Done!</Typography>
             <Typography>Error</Typography>
