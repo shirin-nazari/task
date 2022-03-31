@@ -1,7 +1,8 @@
 import { Box, Button, Container, Paper, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import ImageIcon from '@mui/icons-material/Image';
-import { FileUploader } from 'react-drag-drop-files';
+import { useDropzone } from 'react-dropzone';
+import Drag from './Drag';
 import { add } from '../redux/feacture/data/dataSlice';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
@@ -41,16 +42,10 @@ const getData = async () => {
   }
 };
 // finish use api
-const fileTypes = ['JPG', 'PNG', 'GIF'];
 
-function DragDrop() {
+function DragDrop(props) {
   const [upload, setUpload] = useState(false);
   const dispatch = useDispatch();
-
-  // var xhr = new XMLHttpRequest();
-  // xhr.open('POST', 'https://api.tinify.com/shrink', true);
-
-  // xhr.send(postData);
   const handleForm = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -59,17 +54,7 @@ function DragDrop() {
   const handleChange = (file) => {
     setFile(file);
   };
-  const FileUpload = styled(FileUploader)(() => {
-    return {
-      // width: 500,
-      background: 'pink',
-      height: '100vh',
-      // margin: '0px auto',
-      // padding: 5,
-      // border: '4px dashed #E4F0FF ',
-      // color: '#1D88FF',
-    };
-  });
+
   const uploader = {
     // width: 500,
     background: 'pink',
@@ -79,6 +64,19 @@ function DragDrop() {
     border: '4px dashed #E4F0FF ',
     color: '#1D88FF',
   };
+  const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
+
+  const files = acceptedFiles.map((file) => (
+    <li key={file.path}>
+      {file.path} - {file.size} bytes
+    </li>
+  ));
+  const getPic = acceptedFiles.map((fuck) => console.log(fuck));
+  console.log(getPic);
+  // var xhr = new XMLHttpRequest();
+  // xhr.open('POST', 'https://api.tinify.com/shrink', true);
+
+  // xhr.send(postData);
   return (
     <Container
       sx={{
@@ -99,58 +97,19 @@ function DragDrop() {
         }}
         component="section"
       >
-        {/* <form
-          onDrag={handleForm}
-          onDragStart={handleForm}
-          onDragEnd={handleForm}
-          onDragOver={handleForm}
-          onDragEnter={handleForm}
-          onDragLeave={handleForm}
-          onDrop={handleForm}
-        > */}
-        {/* <figure>
+        <div {...getRootProps({ className: 'dropzone' })}>
+          <input {...getInputProps()} />
+          <figure>
             <ImageIcon sx={{ fontSize: '50px' }} />
           </figure>
           <Typography variant="h5" component="p">
             Drop your image here (:
-          </Typography> */}
-        <FileUploader
-          handleChange={handleChange}
-          style={uploader}
-          name="file"
-          hoverTitle="Drop here (:"
-          types={fileTypes}
-          onDrop={(e) => {
-            setUpload(true);
-
-            // dispatch(post(e.target.value));
-            dispatch(add(e.name));
-            console.log(e);
-          }}
-        />
-
-        {/* /* <input
-            type="file"
-            name="files[]"
-            data-multiple-caption="{count} files selected"
-            multiple
-            onDrop={(e) => {
-              setUpload(true);
-              console.log(e.target.value);
-              // dispatch(post(e.target.value));
-              droppedFiles = e.originalEvent.dataTransfer.files;
-              dispatch(add(e.target.files[0].name));
-              console.log(e.target.files[0].name);
-            }}
-          /> */}
-        {/* <Box
-            sx={upload === false ? { display: 'none' } : { display: 'block' }}
-          >
-            <Typography>uploading</Typography>
-            <Typography>Done!</Typography>
-            <Typography>Error</Typography>
-          </Box> */}
-        {/* </form> */}
+          </Typography>
+        </div>
+        <aside>
+          <h4>output :</h4>
+          <ul>{files}</ul>
+        </aside>
       </Paper>
     </Container>
   );
