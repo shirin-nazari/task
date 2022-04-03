@@ -72,7 +72,7 @@ function DragDrop(props) {
     </li>
   ));
   const getPic = acceptedFiles.map((fuck) => console.log(fuck));
-  console.log(getPic);
+
   // var xhr = new XMLHttpRequest();
   // xhr.open('POST', 'https://api.tinify.com/shrink', true);
 

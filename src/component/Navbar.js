@@ -14,8 +14,8 @@ import { styled } from '@mui/system';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import { Home, Search } from '@mui/icons-material';
+
+import Search from '@mui/icons-material/Search';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Drawer, List, ListItem, ListItemText } from '@mui/material';
@@ -101,7 +101,7 @@ export default function Navbar() {
           <MenuIcon
             onClick={() => {
               if (menu === false) {
-                setMenu(true);
+                setMenu(!false);
               } else {
                 setMenu(false);
               }
