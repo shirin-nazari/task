@@ -37,7 +37,7 @@ const postDataFunc = async () => {
   try {
     const request = await axios({
       method: 'post',
-      url: '/shrink',
+      url: 'https://api.tinify.com/shrink',
       data: {
         source: {
           url: 'https://tinypng.com/images/panda-happy.png',
@@ -60,7 +60,7 @@ const postDataFunc = async () => {
 
     return request;
   } catch (err) {
-    console.error(err);
+    console.error(err.response);
   }
 };
 postDataFunc();
