@@ -60,7 +60,7 @@ const postDataFunc = async () => {
 
     return request;
   } catch (err) {
-    console.error(err.response);
+    console.error(err);
   }
 };
 postDataFunc();
