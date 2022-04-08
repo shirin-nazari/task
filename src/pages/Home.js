@@ -8,8 +8,8 @@ export default function Home() {
       {' '}
       {/* <Navbar /> */}
       {/* <Upload /> */}
-      <postDataFunc />
-      <getData />
+      {/* <postDataFunc />
+      <getData /> */}
     </>
   );
 }
