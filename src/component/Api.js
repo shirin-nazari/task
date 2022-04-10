@@ -50,11 +50,11 @@ const postDataFunc = async () => {
         password: 'ZTMjKPwYnnbPxzRLxVh7fDqjgKxdZLGb',
       },
       headers: {
-        'Access-Control-Allow-Origin': '*',
-
-        // 'Access-Control-Allow-Headers': '*',
-        // 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': '*',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        'Access-Control-Allow-Credentials': true,
       },
     });
 
@@ -65,26 +65,26 @@ const postDataFunc = async () => {
 };
 postDataFunc();
 
-// const getData = async () => {
-//   try {
-//     const response = await axios({
-//       method: 'get',
-//       auth: {
-//         username: 'shirinnazari',
-//         password: 'ZTMjKPwYnnbPxzRLxVh7fDqjgKxdZLGb',
-//       },
-//       url: 'https://api.tinify.com/output/3nxvq1vz1tpgwaa0rnm6yjqfyzutegyr',
-//       // url: `https://api.tinify.com/output/${postDataFunc(Request.output.url)}`,
-//       headers: {
-//         'Access-Control-Allow-Origin': '*',
-//         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-//         'Content-Type': 'application/json',
-//       },
-//     });
-//     console.log(response);
-//   } catch (err) {
-//     console.error(err);
-//   }
-// };
-// getData();
+const getData = async () => {
+  try {
+    const response = await axios({
+      method: 'get',
+      auth: {
+        username: 'shirinnazari',
+        password: 'ZTMjKPwYnnbPxzRLxVh7fDqjgKxdZLGb',
+      },
+      url: 'https://api.tinify.com/output/3nxvq1vz1tpgwaa0rnm6yjqfyzutegyr',
+      // url: `https://api.tinify.com/output/${postDataFunc(Request.output.url)}`,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        'Content-Type': 'application/json',
+      },
+    });
+    console.log(response);
+  } catch (err) {
+    console.error(err);
+  }
+};
+getData();
 // // finish use api
