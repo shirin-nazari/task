@@ -6,21 +6,11 @@ import { add } from '../redux/feacture/data/dataSlice';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
-// use api
-// async function for post
-// I dont know what do you for you
-const config = {
-  headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-    'Content-Type': 'application/json',
-  },
-};
 const postDataFunc = async () => {
   try {
     const request = await axios({
       method: 'post',
-      url: 'https://api.tinify.com/shrink',
+      url: 'http://api.tinify.com/shrink',
       data: {
         source: {
           url: 'https://tinypng.com/images/panda-happy.png',
@@ -28,14 +18,17 @@ const postDataFunc = async () => {
           // url: src,
         },
       },
-      auth: {
-        username: 'shirinnazari',
-        password: 'ZTMjKPwYnnbPxzRLxVh7fDqjgKxdZLGb',
-      },
+      timeout: 1000 * 30,
       headers: {
-        // 'Content-Type': 'application/json',
-        // 'Access-Control-Allow-Origin': '*',
-        config,
+        Accept: '*',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type, x-requested-with',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        'Access-Control-Allow-Credentials': true,
+        allowedOrigins: '*',
+        Authorization:
+          'Basic c2hpcmlubmF6YXJpOjhrUzRQdHNyZzA2ODhiS3ZGTmxHalpkMEJZUUdxcGRs',
       },
     });
 
@@ -62,27 +55,33 @@ postDataFunc();
 //   headers: { 'Content-Type': 'application/json' },
 
 // async function get(){}
-const getData = async () => {
-  try {
-    const response = await axios({
-      method: 'get',
-      auth: {
-        username: 'shirinnazari',
-        password: 'ZTMjKPwYnnbPxzRLxVh7fDqjgKxdZLGb',
-      },
-      url: 'https://api.tinify.com/output/3nxvq1vz1tpgwaa0rnm6yjqfyzutegyr',
-      // url: `https://api.tinify.com/output/${postDataFunc(Request.output.url)}`,
-      headers: {
-        // 'Content-Type': 'application/json',
-        config,
-      },
-    });
-    console.log(response);
-  } catch (err) {
-    console.error(err);
-  }
-};
-getData();
+// const getData = async () => {
+//   try {
+//     const response = await axios({
+//       method: 'get',
+//       auth: {
+//         username: 'shirinnazari',
+//         password: '8kS4Ptsrg0688bKvFNlGjZd0BYQGqpdl',
+//       },
+//       url: 'https://api.tinify.com/output/3nxvq1vz1tpgwaa0rnm6yjqfyzutegyr',
+//       // url: `https://api.tinify.com/output/${postDataFunc(Request.output.url)}`,
+//       headers: {
+//         Accept: '*',
+//         'Content-Type': 'application/json',
+//         'Access-Control-Allow-Origin': '*',
+//         'Access-Control-Allow-Headers': '*',
+//         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+//         'Access-Control-Allow-Credentials': true,
+//         Authorization:
+//           'Basic c2hpcmlubmF6YXJpOjhrUzRQdHNyZzA2ODhiS3ZGTmxHalpkMEJZUUdxcGRs',
+//       },
+//     });
+//     console.log(response);
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
+// getData();
 // finish use api
 
 function DragDrop(props) {
